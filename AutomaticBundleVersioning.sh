@@ -70,10 +70,12 @@ echo "Branch name: ${branchName}"
 
 function setBundleVersion()
 {
-  /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $1" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
+  /usr/libexec/PlistBuddy -c "Delete :CFBundleVersion" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
+  /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $1" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
 
   if [ "$DEBUG_INFORMATION_FORMAT" == "dwarf-with-dsym" ]; then
-    /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $1" "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist"
+    /usr/libexec/PlistBuddy -c "Delete :CFBundleVersion" "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $1" "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist"
   fi
 }
 
@@ -91,10 +93,12 @@ function setBundleShortVersionString
     fullString="$1"
   fi
 
-  /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $fullString" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
+  /usr/libexec/PlistBuddy -c "Delete :CFBundleShortVersionString" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
+  /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $fullString" "${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
 
   if [ "$DEBUG_INFORMATION_FORMAT" == "dwarf-with-dsym" ]; then
-    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $fullString" "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist"
+    /usr/libexec/PlistBuddy -c "Delete :CFBundleShortVersionString" "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $fullString" "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist"
   fi
 }
 
