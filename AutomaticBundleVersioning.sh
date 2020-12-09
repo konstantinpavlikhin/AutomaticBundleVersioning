@@ -20,7 +20,7 @@ echo "Commits count: ${commitsCount}"
 
 # * * *.
 
-versionTagOrNil=$(git describe --abbrev=0 --match 'v[0-9].[0-9].[0-9]*' HEAD 2>/dev/null)
+versionTagOrNil=$(git describe --abbrev=0 --match 'v[0-9]*.[0-9]*.[0-9]*' HEAD 2>/dev/null)
 
 echo "Version tag: ${versionTagOrNil}"
 
